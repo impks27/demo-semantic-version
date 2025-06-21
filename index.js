@@ -53,4 +53,6 @@ function getSemanticVersion() {
   }
 }
 
-console.log(getSemanticVersion());
+// Output the generated version in a structured format
+const version = getSemanticVersion();
+console.log(`::set-output name=version::${version}`);
