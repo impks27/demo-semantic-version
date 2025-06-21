@@ -1,0 +1,14 @@
+name: "Generate Semantic Version"
+description: "A GitHub Action to generate semantic versioning based on commit messages."
+author: "Your Name"
+inputs:
+  branch:
+    description: "The branch to analyze for semantic versioning."
+    required: false
+    default: "main"
+outputs:
+  version:
+    description: "The generated semantic version."
+runs:
+  using: "node20"
+  main: "index.js"
