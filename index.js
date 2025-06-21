@@ -41,17 +41,17 @@ function getSemanticVersion() {
 
     console.log('Determining which part of the version to increment based on Conventional Commits...');
     // Determine which part of the version to increment based on Conventional Commits
-    if (commitMessages.some(msg => msg.includes('BREAKING CHANGE'))) {
-      console.log('Found "BREAKING CHANGE" in commit messages. Incrementing major version...');
+    if (commitMessages.some(msg => msg.toUpperCase().includes('BREAKING CHANGE') || msg.toUpperCase().includes('MAJOR'))) {
+      console.log('Found "BREAKING CHANGE" or "MAJOR" in commit messages. Incrementing major version...');
       major += 1;
       minor = 0; // Reset minor
       patch = 0; // Reset patch
-    } else if (commitMessages.some(msg => msg.startsWith('feat'))) {
-      console.log('Found "feat" in commit messages. Incrementing minor version...');
+    } else if (commitMessages.some(msg => msg.toUpperCase().includes('FEAT') || msg.toUpperCase().includes('MINOR'))) {
+      console.log('Found "FEAT" or "MINOR" in commit messages. Incrementing minor version...');
       minor += 1;
       patch = 0; // Reset patch
-    } else if (commitMessages.some(msg => msg.startsWith('fix'))) {
-      console.log('Found "fix" in commit messages. Incrementing patch version...');
+    } else if (commitMessages.some(msg => msg.toUpperCase().includes('FIX') || msg.toUpperCase().includes('PATCH'))) {
+      console.log('Found "FIX" or "PATCH" in commit messages. Incrementing patch version...');
       patch += 1;
     } else {
       console.log('No Conventional Commit rules matched. Incrementing patch version by default...');
