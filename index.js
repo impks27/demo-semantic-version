@@ -7,9 +7,9 @@ function getSemanticVersion() {
     const allTags = execSync('git tag', { encoding: 'utf-8' }).split('\n').filter(Boolean);
     console.log('All tags:', allTags);
 
-    console.log('Filtering tags that follow semantic versioning pattern...');
-    // Filter tags that follow semantic versioning pattern
-    const semverTags = allTags.filter(tag => /^\d+\.\d+\.\d+$/.test(tag));
+    console.log('Filtering tags that follow semantic versioning pattern and do not start with a year...');
+    // Filter tags that follow semantic versioning pattern and exclude tags starting with a year
+    const semverTags = allTags.filter(tag => /^\d+\.\d+\.\d+$/.test(tag) && !/^20\d{2}\./.test(tag));
     console.log('Semantic version tags:', semverTags);
 
     if (semverTags.length === 0) {
@@ -70,4 +70,4 @@ function getSemanticVersion() {
 
 // Output the generated version in a structured format
 const version = getSemanticVersion();
-console.log(`::set-output name=version::${version}`);
+console.log(`::set-output name=version::${version.toUpperCase()}`);
