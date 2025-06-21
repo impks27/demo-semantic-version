@@ -39,8 +39,8 @@ function getSemanticVersion() {
     const commitMessages = execSync(`git log ${latestTag}..HEAD --pretty=format:%s`, { encoding: 'utf-8' }).split('\n');
     console.log('Commit messages:', commitMessages);
 
-    console.log('Determining which part of the version to increment...');
-    // Determine which part of the version to increment
+    console.log('Determining which part of the version to increment based on Conventional Commits...');
+    // Determine which part of the version to increment based on Conventional Commits
     if (commitMessages.some(msg => msg.includes('BREAKING CHANGE'))) {
       console.log('Found "BREAKING CHANGE" in commit messages. Incrementing major version...');
       major += 1;
@@ -54,7 +54,7 @@ function getSemanticVersion() {
       console.log('Found "fix" in commit messages. Incrementing patch version...');
       patch += 1;
     } else {
-      console.log('No specific rules matched. Incrementing patch version by default...');
+      console.log('No Conventional Commit rules matched. Incrementing patch version by default...');
       patch += 1;
     }
 
